@@ -29,17 +29,28 @@ app.MapRazorPages();
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllerRoute(
-        name: "pagination",
-        pattern: "Home/Page{productPage}",
-             defaults: new {Controller="Home" ,action="Index" });
-    // определение маршрутов
+        name: null,
+        pattern: "Page{productPage:int}",
+        defaults: new { Controller = "Home", action = "Index" });
+
+    endpoints.MapControllerRoute(
+        name: null,
+        pattern: "Page{productPage:int}",
+        defaults: new { Controller = "Home", action = "Index", productPage = 1 });
+
+    endpoints.MapControllerRoute(
+       name: null,
+       pattern: "{category}",
+       defaults: new { Controller = "Home", action = "Index", productPage = 1 });
+
+    endpoints.MapControllerRoute(
+       name: null,
+       pattern: "",
+       defaults: new { Controller = "Home", action = "Index", productPage = 1 });
+
     endpoints.MapControllerRoute(
         name: "default",
         pattern: "{controller=Home}/{action=Index}/{id?}");
 });
-/*
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
-*/
+
 app.Run();
