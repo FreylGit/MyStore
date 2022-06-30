@@ -12,8 +12,8 @@ using MyStore.Data;
 namespace MyStore.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220605210826_Test")]
-    partial class Test
+    [Migration("20220630102852_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -26,12 +26,12 @@ namespace MyStore.Migrations
 
             modelBuilder.Entity("MyStore.Models.Product", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("ProductId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasColumnName("Id");
+                        .HasColumnName("ProductId");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProductId"), 1L, 1);
 
                     b.Property<string>("Category")
                         .IsRequired()
@@ -60,7 +60,7 @@ namespace MyStore.Migrations
                         .HasColumnType("decimal(18,2)")
                         .HasColumnName("Price");
 
-                    b.HasKey("Id");
+                    b.HasKey("ProductId");
 
                     b.ToTable("Products");
                 });

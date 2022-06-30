@@ -6,8 +6,8 @@ namespace MyStore.Models
     public class Product
     {
         [Key]
-        [Column("Id")]
-        public int Id { get; set; }
+        [Column("ProductId")]
+        public int ProductId { get; set; }
         [Required]
         [Column("Name",TypeName ="nvarchar(100)")]
         [MaxLength(100)]
