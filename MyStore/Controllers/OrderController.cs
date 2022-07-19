@@ -13,17 +13,34 @@ namespace MyStore.Controllers
             _orderRepository = orderRepository;
             _cart = cart;
         }
-        public ViewResult Checkout() => View(new Order());
-
+        public ViewResult List() =>
+            View(_orderRepository.Orders.Where(o => !o.Shipped));
+        [HttpPost]
+        public IActionResult MarkShipped(int orderId)
+        {
+            Order order = _orderRepository.Orders.FirstOrDefault(o => o.OrderId == orderId);
+            if (order != null)
+            {
+                order.Shipped = true;
+                _orderRepository.SaveOrder(order);
+            }
+            return RedirectToAction(nameof(List));
+        }
+        public ViewResult Checkout()
+        {
+            var order = new Order();
+            order.Lines = _cart.Lines.ToArray();
+            return View(order);
+        }
         [HttpPost]
         public IActionResult Checkout(Order order)
         {
+
             if (_cart.Lines.Count() == 0)
             {
                 ModelState.AddModelError("", "Корзина пуста");
             }
 
-            order.Lines = _cart.Lines.ToArray();
             _orderRepository.SaveOrder(order);
             return RedirectToAction(nameof(Completed));
 

@@ -8,16 +8,17 @@ namespace MyStore.Models
         [Key]
         [Column("ProductId")]
         public int ProductId { get; set; }
-        [Required]
+        [Required(ErrorMessage ="Введите наименование товара")]
         [Column("Name",TypeName ="nvarchar(100)")]
         [MaxLength(100)]
         [Display(Name="Название")]
         public string Name { get; set; }
         [Required]
+        [Range(0.1,double.MaxValue,ErrorMessage = "Введите положительное значение для цены")]
         [Column("Price")]
         [MaxLength(8)]
         [Display(Name = "Цена")]
-        public decimal Price { get; set; }
+        public double Price { get; set; }
         [Required]
         [Column("Description",TypeName ="nvarchar(255)")]
         [MaxLength(255)]

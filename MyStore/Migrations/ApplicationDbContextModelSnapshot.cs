@@ -79,6 +79,9 @@ namespace MyStore.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("Shipped")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Zip")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -119,9 +122,9 @@ namespace MyStore.Migrations
                         .HasColumnType("nvarchar(100)")
                         .HasColumnName("Name");
 
-                    b.Property<decimal>("Price")
+                    b.Property<double>("Price")
                         .HasMaxLength(8)
-                        .HasColumnType("decimal(18,2)")
+                        .HasColumnType("float")
                         .HasColumnName("Price");
 
                     b.HasKey("ProductId");

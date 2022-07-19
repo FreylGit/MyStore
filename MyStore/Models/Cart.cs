@@ -26,7 +26,7 @@
         }
         public virtual decimal ComputeTotalValue()
         {
-           return _lineCollection.Sum(e=>e.Product.Price * e.Quantity);
+           return _lineCollection.Sum(e=>(decimal)e.Product.Price * e.Quantity);
         }
         public virtual void Clear()
         {
